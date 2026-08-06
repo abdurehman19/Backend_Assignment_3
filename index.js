@@ -1,8 +1,14 @@
+const express=require('express');
+const auth=require('./routes/authroute');
+const bodyParser=require('body-parser');
+const app=express();
+// app.use((req,res,next)=>{{
+//     req.data ='ishaq';
+//     console.log(req.url);
+//     next(); 
+// }});
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 
-const express = require("express");
-const app = express();
-
-app.listen(4000,()=>{
-    console.log("server is runnig on port 4000");
-    
-})
+app.use('/auth',auth)
+app.listen(3000);
