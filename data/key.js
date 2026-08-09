@@ -1,1 +1,1 @@
-exports.SECRET_KEY="Abdurehman"
+exports.SECRET_KEY="abdurehman"

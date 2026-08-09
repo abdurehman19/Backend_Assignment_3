@@ -1,14 +1,20 @@
-const express=require('express');
-const auth=require('./routes/authroute');
-const bodyParser=require('body-parser');
-const app=express();
-// app.use((req,res,next)=>{{
-//     req.data ='ishaq';
-//     console.log(req.url);
-//     next(); 
-// }});
-app.use(bodyParser.urlencoded({extended:true}));
+const express = require('express');
+const auth = require('./routes/authroute');
+const user = require('./routes/userroute');
+const bodyParser = require('body-parser');
+const { verify } = require('./middlewears/middleauth');
+
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use('/auth',auth)
-app.listen(3000);
+// Login / Signup
+app.use('/auth', auth);
+
+// Protected route
+app.use('/user', verify, user);
+
+app.listen(3000, () => {
+  console.log("Server running on 3000");
+});
