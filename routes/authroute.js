@@ -3,7 +3,7 @@ const { createUser, login } = require("../controllers/auth");
 const router = express.Router();
 router.post("/login", async (req, res) => {
   try {
-  const resp=  await login(req.body.email, req.body.password);
+    const resp = await login(req.body.email, req.body.password);
     res.send(resp);
   } catch (err) {
     res.status(400).send(err.message);
