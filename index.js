@@ -1,13 +1,11 @@
 const express = require('express');
 const auth = require('./routes/authroute');
 const user = require('./routes/userroute');
-const bodyParser = require('body-parser');
 const { verify } = require('./middlewears/middleauth');
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.json())
 
 // Login / Signup
 app.use('/auth', auth);
