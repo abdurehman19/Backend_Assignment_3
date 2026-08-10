@@ -14,7 +14,7 @@ const readData = () => {
 };
 const writeData = (data) => {
   return new Promise((resolve, reject) => {
-    fs.writeFile(jsonFilePath, JSON.stringify(data,null,2), (err) => {
+    fs.writeFile(jsonFilePath, JSON.stringify(data, null, 2), (err) => {
       if (err) {
         return reject(err);
       }
@@ -30,9 +30,9 @@ exports.createUser = async (email, password) => {
       throw new Error("user already exist!");
     } else {
       const userId = Date.now();
-      const hashpassword = await bcrypt.hash(password,10)
+      const hashpassword = await bcrypt.hash(password, 10)
 
-      await writeData([...users, { email, password:hashpassword, userId }]);
+      await writeData([...users, { email, password: hashpassword, userId }]);
     }
   }
   catch (err) {

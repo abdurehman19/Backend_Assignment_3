@@ -14,5 +14,5 @@ app.use('/auth', auth);
 app.use('/user', verify, user);
 
 app.listen(3000, () => {
-  console.log("Server running on 3000");
+    console.log("Server running on 3000");
 });
