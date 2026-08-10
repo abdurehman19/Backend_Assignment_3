@@ -14,3 +14,16 @@ const readdata = ()=>{
     })
    })
 }
+
+
+const writedata = ()=>{
+   return new Promise((resolve,reject)=>{
+     fs.writeFile(filepath,JSON.stringify(data),(err)=>{
+        if (err) {
+           return reject
+        }else{
+            resolve ()
+        }
+    })
+   })
+}
