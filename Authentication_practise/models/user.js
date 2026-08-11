@@ -1,6 +1,7 @@
 const express = require("express")
 const fs = require("fs")
 const path = require("path")
+const bcrypt = require("bcrypt")
 const filepath = fs.readFile(path.join(),process.cwd("data","user.json"))
 
 const readdata = ()=>{
@@ -26,4 +27,23 @@ const writedata = ()=>{
         }
     })
    })
+}
+
+  exports.createuser = async(email,password)=>{
+     
+    try {
+        const users = await readdata()
+    const matched = users.find(u=> email===email)
+    if (matched) {
+        throw new Error("user already exists ")
+    }else{
+        const uid = Date.now()
+        const hashpassword = await bcrypt.hash(password,12)
+
+        await writedata ([...users , email,hashpassword,uid])
+    }
+    } catch (error) {
+        
+    }
+
 }
