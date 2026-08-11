@@ -2,15 +2,15 @@ const express = require("express")
 const fs = require("fs")
 const path = require("path")
 const bcrypt = require("bcrypt")
-const filepath = path.join(process.cwd(),"data","user.json")
+const filepath = path.join(process.cwd(),"database","user.json")
 
 const readdata = ()=>{
    return new Promise((resolve,reject)=>{
      fs.readFile(filepath,(err,data)=>{
         if (err) {
-           return reject
+           return reject(err)
         }else{
-            resolve (JSON.parse(data.toString))
+            resolve (JSON.parse(data.toString()))
         }
     })
    })
@@ -19,9 +19,9 @@ const readdata = ()=>{
 
 const writedata = (data)=>{
    return new Promise((resolve,reject)=>{
-     fs.writeFile(filepath,JSON.stringify(data),(err)=>{
+     fs.writeFile(filepath,JSON.stringify(data,null,1),(err)=>{
         if (err) {
-           return reject
+           return reject(err)
         }else{
             resolve ()
         }
@@ -33,7 +33,7 @@ const writedata = (data)=>{
      
     try {
         const users = await readdata()
-    const matched = users.find(u=> email===email)
+    const matched = users.find(u=>u.email===email)
     if (matched) {
         throw new Error("user already exists ")
     }else{
@@ -49,10 +49,10 @@ const writedata = (data)=>{
 
 }
 
-exports.loginuser = async()=>{
+exports.loginuser = async(email)=>{
     try {
         const users = await readdata()
-     const matched = users.find(u=> email===email)
+     const matched = users.find(u=> u.email===email)
      if (matched) {
      return matched
      }

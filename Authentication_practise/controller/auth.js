@@ -16,7 +16,7 @@ exports.login = async (email, password) => {
         if (!user) {
             return "wrong email or password "
         }
-        const ifmatched = bcrypt.compare(password, user.password);
+        const ifmatched = await bcrypt.compare(password, user.password);
 
         if (ifmatched) {
             return "login successfull"

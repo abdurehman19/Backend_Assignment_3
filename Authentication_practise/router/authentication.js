@@ -5,19 +5,18 @@ const router = express.Router()
 
 router.post('/signup',async(req,res)=>{
      try {
-        await signup (req.body.eamil,req.body.password)
+        await signup (req.body.email,req.body.password)
         res.send("sign up successful")
      } catch (error) {
-         res.status(400).send(error.massage)
+         res.status(400).send(error)
      }
 })
 router.post('/login',async(req,res)=>{
     try {
-        const email = (req.body.email)
-        const password = (req.body.password)
-   const res =   await login (email,password)
-        res.send(res)
+   const resq =   await login (req.body.email,req.body.password)
+        res.send(resq)
     } catch (error) {
-        res.status(400).send(error.massage)
+        res.status(400).send(error)
     }
 })
+module.exports=router
