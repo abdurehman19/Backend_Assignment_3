@@ -8,7 +8,7 @@ router.post('/signup',async(req,res)=>{
         await signup (req.body.email,req.body.password)
         res.send("sign up successful")
      } catch (error) {
-         res.status(400).send(error)
+    res.status(400).json({ message: "User already exists" });
      }
 })
 router.post('/login',async(req,res)=>{

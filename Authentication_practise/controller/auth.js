@@ -1,5 +1,7 @@
 const { createuser, loginuser } = require("../models/user")
 const bcrypt = require("bcrypt")
+const jwt = require('jsonwebtoken');
+
 
 exports.signup = async (email, password) => {
     try {
@@ -17,9 +19,11 @@ exports.login = async (email, password) => {
             return "wrong email or password "
         }
         const ifmatched = await bcrypt.compare(password, user.password);
-
+        
         if (ifmatched) {
-            return "login successfull"
+            const  token = jwt.sign({email }, 'test');
+
+            return {token}
         } else {
             return "wrong email or password "
         }

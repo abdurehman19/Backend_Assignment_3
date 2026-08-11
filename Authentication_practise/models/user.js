@@ -35,7 +35,7 @@ const writedata = (data)=>{
         const users = await readdata()
     const matched = users.find(u=>u.email===email)
     if (matched) {
-        throw new Error("user already exists ")
+        throw new error("user already exists ")
     }else{
         const uid = Date.now()
         const hashpassword = await bcrypt.hash(password,12)
