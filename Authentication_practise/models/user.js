@@ -40,10 +40,24 @@ const writedata = ()=>{
         const uid = Date.now()
         const hashpassword = await bcrypt.hash(password,12)
 
-        await writedata ([...users , email,hashpassword,uid])
+        await writedata ([...users,{email,password:hashpassword,uid}])
     }
     } catch (error) {
         
     }
 
+}
+
+exports.loginuser = async()=>{
+    try {
+        const users = await readdata()
+     const matched = users.find(u=> email===email)
+     if (matched) {
+     return matched
+     }
+
+    } catch (error) {
+        console.log(error);
+        
+    }
 }
