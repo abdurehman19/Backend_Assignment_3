@@ -25,6 +25,7 @@ exports.login = async (email, password) => {
         }
 
     } catch (error) {
-
+       console.log(error);
+       
     }
 }
