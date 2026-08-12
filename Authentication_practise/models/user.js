@@ -4,13 +4,14 @@ const path = require("path")
 const bcrypt = require("bcrypt")
 const filepath = path.join(process.cwd(),"database","user.json")
 
-const readdata = ()=>{
-   return new Promise((resolve,reject)=>{
-     fs.readFile(filepath,(err,data)=>{
+const readdata = ()=>{                  
+return new Promise((resolve,reject)=>{
+     fs.readFile(filepath,(err,data)=>{          //readFile  = file se data NIKALO
         if (err) {
            return reject(err)
         }else{
-            resolve (JSON.parse(data.toString()))
+            resolve (JSON.parse(data.toString()))    // JSON.parse() is string ko JavaScript object/array bana deta hai:
+            // toString() us Buffer ko readable text mein convert karta hai:x`
         }
     })
    })
@@ -19,7 +20,7 @@ const readdata = ()=>{
 
 const writedata = (data)=>{
    return new Promise((resolve,reject)=>{
-     fs.writeFile(filepath,JSON.stringify(data,null,1),(err)=>{
+     fs.writeFile(filepath,JSON.stringify(data),(err)=>{   // writeFile = file mein data DAALO
         if (err) {
            return reject(err)
         }else{
